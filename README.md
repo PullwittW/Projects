@@ -1,4 +1,8 @@
 # Projects
-Hey, 
+Hey,
+
+mein Name ist Wangu Pullwitt, ich bin Schüler und bringe mir neben dem Unterricht weitere Programmierkenntnisse selber bei. 
+Also schau dir meine Projekte gerne an und schreib mir gerne Deine Meinung.
+
 I'm Wangu Pullwitt, a student and self-taught software developer.
-These are all my coding projects, let's give them a try and check it out...
+These are all my coding projects, let's give them a try and check it out.
