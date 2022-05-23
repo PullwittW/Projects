@@ -6,8 +6,11 @@
 # Next step:
 
 # Einführungstext
+print("\n")
 print("Willkommen zum Hangman-Spiel! \n" "Das Spiel besteht darin, ein Wort welches von einem Computer generiert wird in einer bestimmten Anzahl von Versuchen zu erraten. \n" "Wenn du das Wort erraten hast, dann hast du gewonnen! \n" "Wenn du das Wort nicht erraten hast, dann hast du verloren! \n" "Viel Glück! \n")
-print("Die Schwierigkeitsstufe, sprich die Anzahl der Versuche, errechnet sich aus der länge des Wortes bei 'schwer', der länge des Wortes + 3 bei 'mittel' und der länge des Wortes + 6 bei 'leicht'")
+print("Die Schwierigkeitsstufe, sprich die Anzahl der Versuche, errechnet sich aus der länge des Wortes bei 'schwer', \n der länge des Wortes + 3 bei 'mittel' und der länge des Wortes + 6 bei 'leicht'")
+print("\n")
+# Wörterbuch 'woerter.txt' lesen und ein Wort mit mindestens 5 Buchstaben zufällig auswählen
 import random
 randomWordInput = []
 counter = 0
@@ -18,29 +21,31 @@ for line in file:
     if len(line) > 5 :
         randomWordInput.append(line)
     else : continue
-    #print(randomWordInput)
     definedWord = random.choice(randomWordInput)
-#VAR
-#definedWord = 'python'
+
+#Variablen
 listOfInput = []
 listOfWrongInput = []
 anfrageRundenzahl = 1
 wählenDerSchwierigkeit = ""
 
+# Schwierigkeit auswählen
+schwierigkeit = input("Wähle eine Schwierigkeit: (1) Leicht, (2) Mittel, (3) Schwer: ")
+if schwierigkeit == "1":
+    schwierigkeit = len(definedWord) + 6    # leicht
+elif schwierigkeit == "2":
+    schwierigkeit = len(definedWord) + 3    # medium
+elif schwierigkeit == "3":
+    schwierigkeit = len(definedWord)        # hart
 
-# erstellt eine Liste, der Wörter (und zeigt diese an, nur für den Test) | FERTIG
-def splitLetters():
-    list_of_letters = list(definedWord)
-
-
-# erstellt die erste Linie des Wortes | FERTIG
+# erstellt die erste Linie mit '_' des Wortes
 def createLines():
     print("Dein neues Wort: ", end="")
     for char in definedWord:
         print("_ ", end="")
     print("\n")
 
-# checkt, ob der eingegebene Buchstabe in der Liste der Buchstaben vorkommt und gibt ein feedback zurück | FERTIG
+# checkt, ob der eingegebene Buchstabe in der Liste der Buchstaben vorkommt und gibt ein feedback zurück
 def check():
     if inputChar in definedWord:
         listOfInput.append(inputChar)
@@ -49,7 +54,7 @@ def check():
         listOfWrongInput.append(inputChar)
         print('Der eingegebene Buchstabe ', inputChar, ' ist falsch\n')
 
-# soll die neue Linie des Wortes erstellen, wenn ein Buchstabe richtig gewählt wurde soll er in der Liste erscheinen
+# erstellt die neue Linie von '_' des Wortes, unter Einbezug der richtig eingegebenen Buchstaben
 def newLine():
     print("Dein Wort: ", end="")
     for char in definedWord:
@@ -59,40 +64,27 @@ def newLine():
             print("_ ", end="")
     print("\n")
 
-# schwierigkeit auswählen
-schwierigkeit = input("Wähle eine Schwierigkeit: (1) Leicht, (2) Mittel, (3) Schwer: ")
-#print(schwierigkeit)
-if schwierigkeit == "1":
-    schwierigkeit = len(definedWord) + 6    # leicht
-elif schwierigkeit == "2":
-    schwierigkeit = len(definedWord) + 3    # medium
-elif schwierigkeit == "3":
-    schwierigkeit = len(definedWord)        # hart
-
-# Liste des Wortes erstellen
-splitLetters()
-
-# Linien ersellen
+# Aufruf der Funktion für die Ausgabe der ersten Linie
 createLines()
 
+# Schleife, welche die Schwierigkeit berücksichtigt und ob das Wort schon vollständig erraten wurde
 while anfrageRundenzahl <= schwierigkeit or len(listOfInput) == len(definedWord):
-    # Schleife für die Eingabe durch den Nutzer
+    
+    # Eingabe des Buchstabens
     inputChar = input("Buchstabe: ")
-
     # checken, ob der Buchstabe im Wort ist
     check()
-    
-    # Liste der falschen
+    # Liste der falschen Buchstaben ausgeben (Hilfestellung zum erinnern an die bereits eingegebenen Buchstaben)
     if len(listOfWrongInput) != 0:
         print('Liste der falschen Buchstaben:' , listOfWrongInput[:])
-
-    # neue Linie erstellen
+    # Aufruf der Funktion zum Erstellen einer neuen Linie
     newLine()
 
+    # Ausgabe der Anzahl der Versuche und der noch zu verfügungstehenden
     print('Versuche: ', anfrageRundenzahl, 'von', schwierigkeit)
     anfrageRundenzahl += 1
-    #print('Liste der richtig eingegebenen Buchstaben: ',listOfInput[:])
 
+# Ausgabe des Wortes, wenn das Wort nicht erraten wurde
 if listOfInput == definedWord:
     print('Gewonnen!')
 else:
