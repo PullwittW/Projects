@@ -9,6 +9,7 @@
 print("\n")
 print("Willkommen zum Hangman-Spiel! \n" "Das Spiel besteht darin, ein Wort welches von einem Computer generiert wird in einer bestimmten Anzahl von Versuchen zu erraten. \n" "Wenn du das Wort erraten hast, dann hast du gewonnen! \n" "Wenn du das Wort nicht erraten hast, dann hast du verloren! \n" "Viel Glück! \n")
 print("Die Schwierigkeitsstufe, sprich die Anzahl der Versuche, errechnet sich aus der länge des Wortes bei 'schwer', \nder länge des Wortes + 3 bei 'mittel' und der länge des Wortes + 6 bei 'leicht'")
+print("Achtung, es werden nur einzelne Buchstaben akzeptiert! \n")
 print("\n")
 
 # Wörterbuch 'woerter.txt' lesen und ein Wort mit mindestens 5 Buchstaben zufällig auswählen
@@ -49,12 +50,16 @@ def createLines():
 
 # checkt, ob der eingegebene Buchstabe in der Liste der Buchstaben vorkommt und gibt ein feedback zurück
 def check():
-    if inputChar in definedWord:
-        listOfInput.append(inputChar)
-        print('Der eingegebene Buchstabe ', inputChar, ' ist richtig\n')
+    if len(inputChar) < 1 and inputChar.isalpha() == True:
+        if inputChar in definedWord:
+            listOfInput.append(inputChar)
+            print('Der eingegebene Buchstabe ', inputChar, ' ist richtig\n')
+        else:
+            listOfWrongInput.append(inputChar)
+            print('Der eingegebene Buchstabe ', inputChar, ' ist falsch\n')
     else:
-        listOfWrongInput.append(inputChar)
-        print('Der eingegebene Buchstabe ', inputChar, ' ist falsch\n')
+        print('Du hast einen Buchstaben eingegeben, der kein Buchstabe ist\n')
+        exit()
 
 # erstellt die neue Linie von '_' des Wortes, unter Einbezug der richtig eingegebenen Buchstaben
 def newLine():
