@@ -10,6 +10,7 @@ print("\n")
 print("Willkommen zum Hangman-Spiel! \n" "Das Spiel besteht darin, ein Wort welches von einem Computer generiert wird in einer bestimmten Anzahl von Versuchen zu erraten. \n" "Wenn du das Wort erraten hast, dann hast du gewonnen! \n" "Wenn du das Wort nicht erraten hast, dann hast du verloren! \n" "Viel Glück! \n")
 print("Die Schwierigkeitsstufe, sprich die Anzahl der Versuche, errechnet sich aus der länge des Wortes bei 'schwer', \nder länge des Wortes + 3 bei 'mittel' und der länge des Wortes + 6 bei 'leicht'")
 print("\n")
+
 # Wörterbuch 'woerter.txt' lesen und ein Wort mit mindestens 5 Buchstaben zufällig auswählen
 import random
 randomWordInput = []
@@ -69,7 +70,7 @@ def newLine():
 createLines()
 
 # Schleife, welche die Schwierigkeit berücksichtigt und ob das Wort schon vollständig erraten wurde
-while anfrageRundenzahl  <= schwierigkeit  or len(listOfInput) == len(definedWord):
+while anfrageRundenzahl  <= schwierigkeit  or listOfInput == definedWord:
     
     # Eingabe des Buchstabens
     inputChar = input("Buchstabe eingeben: ")
